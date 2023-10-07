@@ -1,5 +1,7 @@
 {
   "name": "asymmetry",
+  "description": "Holographic universe",
+  "author": "Joohyun Park",
   "private": true,
   "version": "0.0.0",
   "type": "module",

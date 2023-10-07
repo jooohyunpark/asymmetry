@@ -5,20 +5,23 @@ import {
   PerspectiveCamera,
   Environment,
 } from "@react-three/drei";
-import Object from "./component/Object";
+
 import Universe from "./component/Universe";
 import Mirror from "./component/Mirror";
+import Shadow from "./component/Shadow";
 
 const App = () => {
+  const universeY = 3;
+
   return (
     <main>
-      <Canvas>
+      <Canvas shadows flat>
         <PerspectiveCamera
           makeDefault
           fov={35}
           near={0.1}
           far={1000}
-          position={[0, 0, 10]}
+          position={[0, 6, 12]}
         />
 
         <color attach="background" args={["white"]} />
@@ -26,8 +29,6 @@ const App = () => {
 
         <OrbitControls
           makeDefault
-          // minDistance={1000}
-          // maxDistance={10000}
           enableDamping
           dampingFactor={0.03}
           enableZoom
@@ -35,13 +36,16 @@ const App = () => {
           enableRotate
           rotateSpeed={0.3}
           maxPolarAngle={Math.PI * 0.5}
-          // enablePan={false}
+          enablePan={false}
+          minDistance={10}
+          maxDistance={20}
+          target={[0, universeY * 0.5, 0]}
         />
 
         <Environment files={"/starmap.hdr"} />
 
         <Mirror />
-        <Universe />
+        <Universe position={[0, universeY, 0]} />
       </Canvas>
     </main>
   );

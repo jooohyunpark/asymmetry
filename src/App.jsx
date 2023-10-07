@@ -8,7 +8,6 @@ import {
 
 import Universe from "./component/Universe";
 import Mirror from "./component/Mirror";
-import Shadow from "./component/Shadow";
 
 const App = () => {
   const universeY = 3;

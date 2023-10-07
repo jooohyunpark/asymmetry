@@ -1,26 +1,27 @@
 import React from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, PerspectiveCamera, Preload } from "@react-three/drei";
+import Object from "./component/Object";
 
 const App = () => {
   return (
     <main>
-      <Canvas>
+      <Canvas flat shadows>
         <PerspectiveCamera
           makeDefault
           fov={35}
           near={1}
-          far={10000}
-          position={[0, 0, 100]}
+          far={1000}
+          position={[0, 0, 50]}
         />
 
-        <color attach="background" args={["black"]} />
-        <ambientLight intensity={1} />
+        <color attach="background" args={["white"]} />
+        <ambientLight intensity={1} color="white" />
 
         <OrbitControls
           makeDefault
-          minDistance={1000}
-          maxDistance={10000}
+          // minDistance={1000}
+          // maxDistance={10000}
           enableDamping
           dampingFactor={0.03}
           enableZoom
@@ -29,6 +30,8 @@ const App = () => {
           rotateSpeed={0.3}
           // enablePan={false}
         />
+
+        <Object />
       </Canvas>
     </main>
   );

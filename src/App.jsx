@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { Canvas } from "@react-three/fiber";
 import {
   OrbitControls,
   PerspectiveCamera,
   Environment,
+  Preload,
 } from "@react-three/drei";
 
 import Universe from "./component/Universe";
@@ -11,10 +13,17 @@ import Mirror from "./component/Mirror";
 
 const App = () => {
   const universeY = 3;
+  const [ready, setReady] = useState(false);
 
   return (
-    <main>
-      <Canvas shadows flat>
+    <motion.main style={{ opacity: ready ? 1 : 0 }}>
+      <Canvas
+        shadows
+        flat
+        onCreated={() => {
+          setReady(true);
+        }}
+      >
         <PerspectiveCamera
           makeDefault
           fov={35}
@@ -45,8 +54,10 @@ const App = () => {
 
         <Mirror />
         <Universe position={[0, universeY, 0]} />
+
+        <Preload all />
       </Canvas>
-    </main>
+    </motion.main>
   );
 };
 

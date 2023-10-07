@@ -7,8 +7,5 @@ export default defineConfig({
     port: 3000,
   },
   plugins: [react()],
-  build: {
-    outDir: "../dist",
-  },
   publicDir: resolve(__dirname, "public"),
 });

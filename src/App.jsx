@@ -6,15 +6,17 @@ import {
   Environment,
 } from "@react-three/drei";
 import Object from "./component/Object";
+import Universe from "./component/Universe";
+import Mirror from "./component/Mirror";
 
 const App = () => {
   return (
     <main>
-      <Canvas flat shadows>
+      <Canvas>
         <PerspectiveCamera
           makeDefault
           fov={35}
-          near={1}
+          near={0.1}
           far={1000}
           position={[0, 0, 10]}
         />
@@ -36,9 +38,10 @@ const App = () => {
           // enablePan={false}
         />
 
-        {/* <Environment files={"/starmap.hdr"} /> */}
+        <Environment files={"/starmap.hdr"} />
 
-        <Object />
+        <Mirror />
+        <Universe />
       </Canvas>
     </main>
   );

@@ -1,21 +1,44 @@
-import React from "react";
-import { Gltf, useGLTF, useTexture } from "@react-three/drei";
+import React, { useEffect, useRef } from "react";
+import { Gltf, useGLTF, MeshReflectorMaterial } from "@react-three/drei";
+import { Reflector } from "three-stdlib";
 
-const Object = ({ url = "/cylinder.glb", ...props }) => {
+export default ({ url = "/cylinder.glb", ...props }) => {
+  const ref = useRef(null);
+
   const { scene, nodes, materials } = useGLTF(url);
 
-  console.log(nodes, materials);
-  const texture = useTexture("/starmap.hdr");
+  // console.log(nodes, materials);
+
+  // useEffect(() => {
+  //   console.log(nodes.top);
+
+  //   const m = new Reflector(nodes.top.geometry, {
+  //     clipBias: 0.003,
+  //     textureWidth: window.innerWidth * window.devicePixelRatio,
+  //     textureHeight: window.innerHeight * window.devicePixelRatio,
+  //     color: 0xb5b5b5,
+  //   });
+
+  //   ref.current.add(m);
+
+  //   console.log(m);
+  // }, []);
 
   return (
     <group>
-      <mesh position={[0, 5, 0]}>
-        <sphereGeometry args={[1, 128, 128]} />
-        <meshBasicMaterial envMap={texture} />
-      </mesh>
       <primitive object={nodes.top}>
-        <meshBasicMaterial envMap={texture} />
-        {/* <meshStandardMaterial metalness={1} roughness={0} color="white" /> */}
+        <MeshReflectorMaterial
+          blur={[0, 0]}
+          resolution={2048}
+          mixBlur={1}
+          mixStrength={100}
+          roughness={0}
+          // depthScale={1.2}
+          // minDepthThreshold={0.4}
+          // maxDepthThreshold={1.4}
+          // color="black"
+          // metalness={0.5}
+        />
       </primitive>
 
       <primitive object={nodes.body}>
@@ -25,5 +48,3 @@ const Object = ({ url = "/cylinder.glb", ...props }) => {
     </group>
   );
 };
-
-export default Object;

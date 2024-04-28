@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion, useSpring } from "framer-motion";
+import { motion } from "framer-motion";
 import { Canvas } from "@react-three/fiber";
 import {
   OrbitControls,
